@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate: {
           min: 1,
-          max: 50,
+          max: 7,
         },
       },
       estante: {
@@ -30,14 +30,15 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          is: /^[A-Z]$/, //esto es para que sea de la A a la Z
+          min: 1,
+          max: 50,
         },
       },
       identificacion: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          is: /^[A-Z]$/,
+          is: /^[A-Z]$/, //esto es para que sea de la A a la Z
         },
       },
       piezaSeguridad: {
