@@ -49,7 +49,16 @@ module.exports = (sequelize) => {
         },
       },
       clientes: {
-        type: DataTypes.ENUM("Toyota", "Volvo"), //falta agregar clientes (son 12)
+        type: DataTypes.ENUM(
+          "TOYOTA",
+          "VOLVO",
+          "GUIDI",
+          "HONDA",
+          "METALSA",
+          "TBA",
+          "VOLKSWAGEN",
+          "MERCEDEZ BENZ"
+        ),
         allowNull: false,
       },
       img: {
