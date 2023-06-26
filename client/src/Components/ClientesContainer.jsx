@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getClientes } from "../../asyncMock";
+import { getClientes } from "../asyncMock";
 import { Box, Flex, Image } from "@chakra-ui/react";
 
 const ClientesContainer = () => {

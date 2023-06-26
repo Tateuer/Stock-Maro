@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Box, Menu } from "@chakra-ui/react";
-import LogoMaro from "../../assets/logoMaro.png";
+import LogoMaro from "../assets/logoMaro.png";
 import { Image } from "@chakra-ui/react";
 
 const NavBar = () => {

@@ -1,8 +1,8 @@
 import "./App.css";
-import NavBar from "./Components/NavBar/NavBar";
+import NavBar from "./Components/NavBar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ClientesContainer from "./Components/ClientesContainer.jsx/ClientesContainer";
-import ConsumiblesContainer from "./Components/ConsumiblesContainer/ConsumiblesContainer";
+import ClientesContainer from "./Components/ClientesContainer";
+import ConsumiblesContainer from "./Components/ConsumiblesContainer";
 import { Box } from "@chakra-ui/react";
 
 function App() {
