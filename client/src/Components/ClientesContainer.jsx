@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getClientes } from "../asyncMock";
-import { Box, Flex, Image } from "@chakra-ui/react";
+import { Box, Grid, Image } from "@chakra-ui/react";
 
 const ClientesContainer = () => {
     const [clientes, setClientes] = useState([]);
@@ -23,18 +23,20 @@ const ClientesContainer = () => {
             border="2px"
             bg="#00B0F0"
             borderRadius="1rem"
-            marginTop="5rem"
+            marginTop="1rem"
             p=".1rem 1rem 1rem 1rem"
         >
-            <h2>Los clientes actuales son:</h2>
+            <h2>CLIENTES DE MARO</h2>
             <Box>
                 {clientes.map((cliente) => (
-                    <Flex
+                    <Grid
+                        key={cliente.id}
                         justifyContent="center"
                         alignItems="center"
                         fontSize="1.5rem"
                         p="1rem"
-                        key={cliente.id}
+                        templateRows={"repeat(3, 1fr)"}
+                        templateColumns={"repeat(2, 1fr)"}
                     >
                         {cliente.cliente}{" "}
                         <Image
@@ -44,7 +46,7 @@ const ClientesContainer = () => {
                             src={cliente.img}
                             alt={cliente.cliente}
                         />
-                    </Flex>
+                    </Grid>
                 ))}
             </Box>
         </Box>

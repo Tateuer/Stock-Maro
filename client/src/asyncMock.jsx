@@ -20,7 +20,7 @@ const clientes = [
     },
     {
         id: "3",
-        cliente: "Guidi",
+        cliente: "Industrias Guidi",
         img: GuidiLogo,
     },
     {
