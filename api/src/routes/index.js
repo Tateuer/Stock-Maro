@@ -25,13 +25,33 @@ router.get("/piezas/:id", async (req, res) => {
   }
 });
 
+// router.get("/piezas/name/:name", async (req, res) => {
+//   const nombre = req.params.name;
+//   try {
+//     if (nombre) {
+//       const piezaNombre = await piezaByName(nombre);
+
+//       if (piezaNombre) {
+//         res.status(200).json(piezaNombre);
+//       } else {
+//         res.status(404).send("No se encontró el nombre");
+//       }
+//     } else {
+//       res.status(400).send("Nombre no proporcionado");
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send("Error server");
+//   }
+// });
+
 router.get("/piezas/name/:name", async (req, res) => {
   const nombre = req.params.name;
   try {
     if (nombre) {
-      const piezaNombre = await piezaByName(nombre);
+      const piezaNombre = await piezaByName(nombre.toLowerCase()); 
 
-      if (piezaNombre) {
+      if (piezaNombre && piezaNombre.length > 0) { 
         res.status(200).json(piezaNombre);
       } else {
         res.status(404).send("No se encontró el nombre");

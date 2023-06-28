@@ -19,13 +19,29 @@ const piezaById = async (id) => {
   }
 };
 
+// const piezaByName = async (nombre) => {
+//   try {
+//     const Op = Sequelize.Op;
+//     const piezaNombre = await Piezas.findAll({
+//       where: {
+//         nombre: {
+//           [Op.like]: `%${nombre}%`,
+//         },
+//       },
+//       raw: true,
+//     });
+//     return piezaNombre;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 const piezaByName = async (nombre) => {
   try {
-    const Op = Sequelize.Op;
     const piezaNombre = await Piezas.findAll({
       where: {
         nombre: {
-          [Op.like]: `%${nombre}%`,
+          [Sequelize.Op.iLike]: `%${nombre}%`,
         },
       },
       raw: true,
