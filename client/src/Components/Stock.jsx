@@ -1,18 +1,25 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { fetchPiezas } from "../redux/actions/stockActions";
 import Search from "./Search";
 import { Box, Text } from "@chakra-ui/react";
+import Modal from "./Modal";
 
 export default function Stock() {
   const dispatch = useDispatch();
   const piezas = useSelector((state) => state.piezas);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPieza, setSelectedPieza] = useState(null);
+
+  const handlePiezaClick = (pieza) => {
+    setSelectedPieza(pieza);
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     dispatch(fetchPiezas());
   }, [dispatch]);
-
-  //console.log("hola", piezas);
 
   return (
     <Box>
@@ -20,15 +27,20 @@ export default function Stock() {
       <ul>
         {piezas.map((pieza) => (
           <li key={pieza.id}>
-            <Text color={"black"}>Nombre: {pieza.nombre}</Text>
-            <Text color={"black"}>
-              Pieza de seguridad: {pieza.piezaSeguridad}
+            <Text
+              color={"black"}
+              onClick={() => handlePiezaClick(pieza)}
+              style={{ cursor: "pointer" }}
+            >
+              {pieza.nombre}
             </Text>
-            <Text color={"black"}>Clientes: {pieza.clientes}</Text>
-            <img src={pieza.img} alt="Imagen de la pieza" />
           </li>
         ))}
       </ul>
+
+      {isModalOpen && (
+        <Modal pieza={selectedPieza} onClose={() => setIsModalOpen(false)} />
+      )}
     </Box>
   );
 }

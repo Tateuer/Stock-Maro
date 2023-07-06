@@ -31,7 +31,7 @@ const NavBar = () => {
         </Link>
       </GridItem>
       {location.pathname !== "/" && (
-        <Button fontSize="30px" onClick={handleGoBack}>
+        <Button fontSize="20px" onClick={handleGoBack}>
           Atrás
         </Button>
       )}
