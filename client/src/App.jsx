@@ -7,18 +7,21 @@ import { Box } from "@chakra-ui/react";
 import Stock from "./Components/Stock";
 
 function App() {
-  return (
-    <Box bg="white" p="8rem" borderRadius="1rem">
-      <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path="/stock" element={<Stock />} />
-          <Route path="/clientes" element={<ClientesContainer />} />
-          <Route path="/consumibles" element={<ConsumiblesContainer />} />
-        </Routes>
-      </BrowserRouter>
-    </Box>
-  );
+    return (
+        <Box bg="white" p="8rem" borderRadius="1rem">
+            <BrowserRouter>
+                <NavBar />
+                <Routes>
+                    <Route path="/stock" element={<Stock />} />
+                    <Route path="/clientes" element={<ClientesContainer />} />
+                    <Route
+                        path="/consumibles"
+                        element={<ConsumiblesContainer />}
+                    />
+                </Routes>
+            </BrowserRouter>
+        </Box>
+    );
 }
 
 export default App;
