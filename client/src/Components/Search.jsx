@@ -19,12 +19,19 @@ export default function Search() {
   return (
     <Box>
       <Input
+        color={"black"}
+        bg={"white"}
+        h={"20px"}
+        w={"200px"}
+        borderRadius={"4px"}
         type="text"
         onChange={handleChange}
         value={search}
-        placeholder="Nombre de la pieza"
+        placeholder="Codigo"
       />
-      <Button onClick={handleSubmit}>Buscar</Button>
+      <Button bg={"#0075B7"} m={"10px"} fontSize="15px" onClick={handleSubmit}>
+        Buscar
+      </Button>
     </Box>
   );
 }
