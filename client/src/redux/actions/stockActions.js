@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const FETCH_PIEZAS = "FETCH_PIEZAS";
 export const SEARCH_PIEZAS = "SEARCH_PIEZAS";
+export const ORDER_ESTANTERIA = "ORDER_ESTANTERIA";
 
 export const fetchPiezas = () => {
   return async (dispatch) => {
@@ -22,3 +23,10 @@ export const searchPiezas = (search) => {
     dispatch({ type: SEARCH_PIEZAS, payload: piezas });
   };
 };
+
+export function orderEstanteria(order) {
+  return {
+    type: ORDER_ESTANTERIA,
+    payload: order,
+  };
+}

@@ -6,6 +6,7 @@ import Search from "./Search";
 import { Box, Text, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import Modal from "./Modal";
 import UploadImage from "../Cloudinary/Cloudinary";
+import Order from "./Order";
 
 export default function Stock() {
   const dispatch = useDispatch();
@@ -24,7 +25,9 @@ export default function Stock() {
 
   return (
     <Box>
+      {/* <UploadImage /> */}
       <Search />
+      <Order />
       <Table variant="striped">
         <Thead>
           <Tr color={"black"}>
