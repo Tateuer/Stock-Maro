@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, Td, Button } from "@chakra-ui/react";
 
 export default function Modal({ pieza, onClose }) {
   if (!pieza) {
@@ -27,12 +27,24 @@ export default function Modal({ pieza, onClose }) {
         >
           Detalles de la pieza
         </Text>
-        <Text color={"black"}>Nombre: {pieza.nombre}</Text>
-        <Text color={"black"}>Estante: {pieza.estante}</Text>
+        <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+          {pieza.img && (
+            <img src={pieza.img} alt={pieza.nombre} width={"100px"} />
+          )}
+        </Box>
+        <Text color={"black"}>Codigo: {pieza.nombre}</Text>
         <Text color={"black"}>Estantería: {pieza.estanteria}</Text>
+        <Text color={"black"}>Estante: {pieza.estante}</Text>
         <Text color={"black"}>Posición: {pieza.posicion}</Text>
         <Text color={"black"}>Identificación: {pieza.identificacion}</Text>
-        <button onClick={onClose}>Cerrar</button>
+        <Text color={"black"}>Cliente: {pieza.clientes}</Text>
+        <Text color={"black"}>Cantidad:</Text>
+        <Button bg={"#0075B7"} m={"10px"} fontSize="15px">
+          Descargar Archivo
+        </Button>
+        <Button bg={"#0075B7"} onClick={onClose}>
+          Cerrar
+        </Button>
       </Box>
     </Box>
   );

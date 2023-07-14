@@ -26,15 +26,30 @@ export default function Stock() {
   return (
     <Box>
       {/* <UploadImage /> */}
-      <Search />
+      <Box
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+      >
+        <Text
+          fontWeight={"bold"}
+          fontSize={"25px"}
+          marginRight={"10px"}
+          color={"#0075B7"}
+        >
+          STOCK
+        </Text>
+        <Search />
+      </Box>
       <Order />
       <Table variant="striped">
         <Thead>
           <Tr color={"black"}>
+            <Th padding={"30px"}>ESTANTERÍA</Th>
+            <Th padding={"30px"}>ESTANTE</Th>
+            <Th padding={"30px"}>POSICIÓN</Th>
+            <Th padding={"30px"}>IDENTIFICACIÓN</Th>
             <Th padding={"30px"}>CÓDIGO</Th>
-            <Th padding={"30px"}>PIEZA DE SEGURIDAD</Th>
-            <Th padding={"30px"}>CLIENTES</Th>
-            <Th padding={"30px"}>IMAGEN</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -46,19 +61,36 @@ export default function Stock() {
                   onClick={() => handlePiezaClick(pieza)}
                   style={{ cursor: "pointer" }}
                 >
-                  {pieza.nombre}
+                  {pieza.estanteria}
                 </Text>
               </Td>
-              <Td color={"black"}>{pieza.piezaSeguridad.toUpperCase()}</Td>
-              <Td color={"black"}>{pieza.clientes}</Td>
               <Td
-                display={"flex"}
-                justifyContent={"center"}
-                alignItems={"center"}
+                onClick={() => handlePiezaClick(pieza)}
+                style={{ cursor: "pointer" }}
+                color={"black"}
               >
-                {pieza.img && (
-                  <img src={pieza.img} alt={pieza.nombre} width={"60px"} />
-                )}
+                {pieza.estante}
+              </Td>
+              <Td
+                onClick={() => handlePiezaClick(pieza)}
+                style={{ cursor: "pointer" }}
+                color={"black"}
+              >
+                {pieza.posicion}
+              </Td>
+              <Td
+                onClick={() => handlePiezaClick(pieza)}
+                style={{ cursor: "pointer" }}
+                color={"black"}
+              >
+                {pieza.identificacion}
+              </Td>
+              <Td
+                onClick={() => handlePiezaClick(pieza)}
+                style={{ cursor: "pointer" }}
+                color={"black"}
+              >
+                {pieza.nombre}
               </Td>
             </Tr>
           ))}
