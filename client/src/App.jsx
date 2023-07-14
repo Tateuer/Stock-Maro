@@ -5,6 +5,8 @@ import ClientesContainer from "./Components/ClientesContainer";
 import ConsumiblesContainer from "./Components/ConsumiblesContainer";
 import { Box } from "@chakra-ui/react";
 import Stock from "./Components/Stock";
+import PiezaSeguridad from "./Components/PiezaSeguridad";
+import Cilindros from "./Components/Cilindros";
 
 function App() {
     return (
@@ -18,6 +20,11 @@ function App() {
                         path="/consumibles"
                         element={<ConsumiblesContainer />}
                     />
+                    <Route
+                        path="/piezaseguridad"
+                        element={<PiezaSeguridad />}
+                    />
+                    <Route path="/cilindros" element={<Cilindros />} />
                 </Routes>
             </BrowserRouter>
         </Box>
