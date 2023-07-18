@@ -67,6 +67,11 @@ module.exports = (sequelize) => {
       archivo: {
         type: DataTypes.STRING,
       },
+      cantidad: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
     },
     {
       timestamps: false,

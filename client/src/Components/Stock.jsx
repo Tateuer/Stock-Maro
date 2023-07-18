@@ -1,9 +1,22 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { fetchPiezas } from "../redux/actions/stockActions";
+import {
+  fetchPiezas,
+  actualizarCantidadPieza,
+} from "../redux/actions/stockActions";
 import Search from "./Search";
-import { Box, Text, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Button,
+} from "@chakra-ui/react";
 import Modal from "./Modal";
 import UploadImage from "../Cloudinary/Cloudinary";
 import Order from "./Order";
@@ -17,6 +30,20 @@ export default function Stock() {
   const handlePiezaClick = (pieza) => {
     setSelectedPieza(pieza);
     setIsModalOpen(true);
+  };
+
+  const handleIncrement = (piezaId) => {
+    const pieza = piezas.find((p) => p.id === piezaId);
+    const nuevaCantidad = pieza.cantidad + 1;
+    dispatch(actualizarCantidadPieza(piezaId, nuevaCantidad));
+  };
+
+  const handleDecrement = (piezaId) => {
+    const pieza = piezas.find((p) => p.id === piezaId);
+    if (pieza.cantidad > 0) {
+      const nuevaCantidad = pieza.cantidad - 1;
+      dispatch(actualizarCantidadPieza(piezaId, nuevaCantidad));
+    }
   };
 
   useEffect(() => {
@@ -50,6 +77,7 @@ export default function Stock() {
             <Th padding={"30px"}>POSICIÓN</Th>
             <Th padding={"30px"}>IDENTIFICACIÓN</Th>
             <Th padding={"30px"}>CÓDIGO</Th>
+            <Th padding={"30px"}>CANTIDAD</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -91,6 +119,30 @@ export default function Stock() {
                 color={"black"}
               >
                 {pieza.nombre}
+              </Td>
+              <Td>
+                <Button
+                  bg={"#0075B7"}
+                  size={"sm"}
+                  onClick={() => handleDecrement(pieza.id)}
+                >
+                  -
+                </Button>
+                <Text
+                  color={"black"}
+                  fontWeight={"bold"}
+                  display="inline"
+                  paddingX="10px"
+                >
+                  {pieza.cantidad}
+                </Text>
+                <Button
+                  bg={"#0075B7"}
+                  size={"sm"}
+                  onClick={() => handleIncrement(pieza.id)}
+                >
+                  +
+                </Button>
               </Td>
             </Tr>
           ))}

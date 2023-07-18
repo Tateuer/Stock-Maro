@@ -2,6 +2,7 @@ import {
   FETCH_PIEZAS,
   SEARCH_PIEZAS,
   ORDER_ESTANTERIA,
+  UPDATE_PIEZA_CANTIDAD,
 } from "../actions/stockActions";
 
 const initialState = {
@@ -27,6 +28,16 @@ export const piezasReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         piezas: filterEstanteria,
+      };
+    case UPDATE_PIEZA_CANTIDAD:
+      console.log("ID de pieza:", payload.piezaId);
+      console.log("Nueva cantidad:", payload.cantidad);
+      const { piezaId, cantidad } = payload;
+      return {
+        ...state,
+        piezas: state.piezas.map((pieza) =>
+          pieza.id === piezaId ? { ...pieza, cantidad } : pieza
+        ),
       };
     default:
       return { ...state };
