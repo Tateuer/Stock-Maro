@@ -24,7 +24,6 @@ const UploadImage = ({ onUpload }) => {
       const file = await res.json();
 
       setImage(file.secure_url);
-      console.log(file.secure_url);
       onUpload(file.secure_url);
       setLoading(false);
     } catch (error) {}
@@ -41,9 +40,9 @@ const UploadImage = ({ onUpload }) => {
         onChange={upImages}
       />
       {loading ? (
-        <h3>Cargando imagen...</h3>
+        <h3 color="black">Cargando imagen...</h3>
       ) : (
-        <Image src={image} p={"3%"} borderRadius={"1rem"} maxHeight={"12rem"} />
+        <Image src={image} width={"100px"} />
       )}
     </Box>
   );

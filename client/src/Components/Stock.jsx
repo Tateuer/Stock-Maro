@@ -18,7 +18,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import Modal from "./Modal";
-import UploadImage from "../Cloudinary/Cloudinary";
+
 import Order from "./Order";
 
 export default function Stock() {
@@ -52,7 +52,6 @@ export default function Stock() {
 
   return (
     <Box>
-      {/* <UploadImage /> */}
       <Box
         display={"flex"}
         alignItems={"center"}
