@@ -91,6 +91,7 @@ const PiezaForm = () => {
         "TBA",
         "VOLKSWAGEN",
         "MERCEDEZ BENZ",
+        "CILINDROS MARO",
       ].includes(formData.clientes)
     ) {
       newErrors.clientes = "Debe seleccionar un cliente válido";
@@ -249,14 +250,15 @@ const PiezaForm = () => {
             setFormData({ ...formData, clientes: selectedOption.value })
           }
           options={[
-            { value: "TOYOTA", label: "Toyota" },
-            { value: "VOLVO", label: "Volvo" },
-            { value: "GUIDI", label: "Guidi" },
-            { value: "HONDA", label: "Honda" },
-            { value: "METALSA", label: "Metalsa" },
+            { value: "TOYOTA", label: "TOYOTA" },
+            { value: "VOLVO", label: "VOLVO" },
+            { value: "GUIDI", label: "GUIDI" },
+            { value: "HONDA", label: "HONDA" },
+            { value: "METALSA", label: "METALSA" },
             { value: "TBA", label: "TBA" },
-            { value: "VOLKSWAGEN", label: "Volkswagen" },
-            { value: "MERCEDEZ BENZ", label: "Mercedez Benz" },
+            { value: "VOLKSWAGEN", label: "VOLKSWAGEN" },
+            { value: "MERCEDEZ BENZ", label: "MERCEDEZ BENZ" },
+            { value: "CILINDROS MARO", label: "CILINDROS MARO" },
           ]}
           styles={customStyles}
         />

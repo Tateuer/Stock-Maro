@@ -57,7 +57,8 @@ module.exports = (sequelize) => {
           "METALSA",
           "TBA",
           "VOLKSWAGEN",
-          "MERCEDEZ BENZ"
+          "MERCEDEZ BENZ",
+          "CILINDROS MARO"
         ),
         allowNull: false,
       },
