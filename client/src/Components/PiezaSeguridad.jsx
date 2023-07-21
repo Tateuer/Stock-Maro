@@ -5,7 +5,7 @@ import { fetchPiezas } from "../redux/actions/stockActions";
 import Search from "./Search";
 import { Box, Text, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import Modal from "./Modal";
-import UploadImage from "../Cloudinary/Cloudinary";
+import Pagination from "./Paginado";
 import Order from "./Order";
 
 export default function PiezaSeguridad() {
@@ -13,10 +13,30 @@ export default function PiezaSeguridad() {
   const piezas = useSelector((state) => state.piezas);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPieza, setSelectedPieza] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const piezasSeguridad = piezas.filter(
     (pieza) => pieza.piezaSeguridad === "si"
   );
+
+  const totalPages = Math.ceil(piezasSeguridad.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const piezasToShow = piezasSeguridad.slice(startIndex, endIndex);
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
 
   const handlePiezaClick = (pieza) => {
     setSelectedPieza(pieza);
@@ -29,7 +49,6 @@ export default function PiezaSeguridad() {
 
   return (
     <Box>
-      {/* <UploadImage /> */}
       <Box
         display={"flex"}
         alignItems={"center"}
@@ -58,7 +77,7 @@ export default function PiezaSeguridad() {
           </Tr>
         </Thead>
         <Tbody>
-          {piezasSeguridad.map((pieza) => (
+          {piezasToShow.map((pieza) => (
             <Tr key={pieza.id}>
               <Td>
                 <Text
@@ -110,6 +129,12 @@ export default function PiezaSeguridad() {
           ))}
         </Tbody>
       </Table>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPrev={handlePrevPage}
+        onNext={handleNextPage}
+      />
 
       {isModalOpen && (
         <Modal pieza={selectedPieza} onClose={() => setIsModalOpen(false)} />

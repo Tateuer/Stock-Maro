@@ -18,7 +18,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import Modal from "./Modal";
-
+import Pagination from "./Paginado";
 import Order from "./Order";
 
 export default function Stock() {
@@ -26,11 +26,22 @@ export default function Stock() {
   const piezas = useSelector((state) => state.piezas);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPieza, setSelectedPieza] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const handlePiezaClick = (pieza) => {
     setSelectedPieza(pieza);
     setIsModalOpen(true);
   };
+
+  const getPaginationRange = () => {
+    const startIndex = (currentPage - 1) * 10;
+    const endIndex = startIndex + 10;
+    return [startIndex, endIndex];
+  };
+
+  const [startIndex, endIndex] = getPaginationRange();
+  const piezasToShow = piezas.slice(startIndex, endIndex);
 
   const handleIncrement = (piezaId) => {
     const pieza = piezas.find((p) => p.id === piezaId);
@@ -46,9 +57,13 @@ export default function Stock() {
     }
   };
 
+  // useEffect(() => {
+  //   dispatch(fetchPiezas());
+  // }, [dispatch]);
+
   useEffect(() => {
-    dispatch(fetchPiezas());
-  }, [dispatch]);
+    setTotalPages(Math.ceil(piezas.length / 10));
+  }, [piezas]);
 
   return (
     <Box>
@@ -80,7 +95,7 @@ export default function Stock() {
           </Tr>
         </Thead>
         <Tbody>
-          {piezas.map((pieza) => (
+          {piezasToShow.map((pieza) => (
             <Tr key={pieza.id}>
               <Td>
                 <Text
@@ -147,6 +162,12 @@ export default function Stock() {
           ))}
         </Tbody>
       </Table>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPrev={() => setCurrentPage((prevPage) => prevPage - 1)}
+        onNext={() => setCurrentPage((prevPage) => prevPage + 1)}
+      />
 
       {isModalOpen && (
         <Modal pieza={selectedPieza} onClose={() => setIsModalOpen(false)} />

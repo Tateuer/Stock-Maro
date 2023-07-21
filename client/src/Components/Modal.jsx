@@ -38,7 +38,7 @@ export default function Modal({ pieza, onClose }) {
         <Text color={"black"}>Posición: {pieza.posicion}</Text>
         <Text color={"black"}>Identificación: {pieza.identificacion}</Text>
         <Text color={"black"}>Cliente: {pieza.clientes}</Text>
-        <Text color={"black"}>Cantidad:</Text>
+        <Text color={"black"}>Cantidad:{pieza.cantidad}</Text>
         <Button bg={"#0075B7"} m={"10px"} fontSize="15px">
           Descargar Archivo
         </Button>
