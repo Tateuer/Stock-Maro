@@ -59,7 +59,7 @@ export const getClientes = () => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(clientes);
-        }, 250);
+        });
     });
 };
 
@@ -81,6 +81,6 @@ export const getConsumibles = () => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(consumibles);
-        }, 250);
+        });
     });
 };
