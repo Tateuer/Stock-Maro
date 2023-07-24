@@ -134,7 +134,7 @@ const PiezaForm = () => {
                 formData
             );
 
-            console.log(response.data);
+            // console.log(response.data);
 
             setFormData({
                 nombre: "",
