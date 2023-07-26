@@ -12,7 +12,7 @@ export default function Cilindros() {
     const itemsPerPage = 10;
 
     const piezasCilindros = piezas
-        .filter((pieza) => pieza.nombre.startsWith("Cilindro"))
+        .filter((pieza) => pieza.nombre.toLowerCase().startsWith("cilindro"))
         .sort((a, b) => a.identificacion.localeCompare(b.identificacion))
         .sort((a, b) => parseInt(a.posicion) - parseInt(b.posicion))
         .sort((a, b) => parseInt(a.estante) - parseInt(b.estante));
@@ -67,45 +67,35 @@ export default function Cilindros() {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {piezas
-                        .filter((pieza) => pieza.nombre.startsWith("Cilindro"))
-                        .sort((a, b) =>
-                            a.identificacion.localeCompare(b.identificacion)
-                        )
-                        .sort(
-                            (a, b) =>
-                                parseInt(a.posicion) - parseInt(b.posicion)
-                        )
-                        .sort(
-                            (a, b) => parseInt(a.estante) - parseInt(b.estante)
-                        )
-                        .map((pieza) => (
-                            <Tr key={pieza.id}>
-                                <Td>
-                                    <Text color={"black"}>
-                                        {pieza.estanteria}
-                                    </Text>
-                                </Td>
-                                <Td>
-                                    <Text color={"black"}>{pieza.estante}</Text>
-                                </Td>
-                                <Td>
-                                    <Text color={"black"}>
-                                        {pieza.posicion}
-                                    </Text>
-                                </Td>
-                                <Td>
-                                    <Text color={"black"}>
-                                        {pieza.identificacion}
-                                    </Text>
-                                </Td>
-                                <Td>
-                                    <Text color={"black"}>{pieza.nombre}</Text>
-                                </Td>
-                            </Tr>
-                        ))}
+                    {piezasToShow.map((pieza) => (
+                        <Tr key={pieza.id}>
+                            <Td>
+                                <Text color={"black"}>{pieza.estanteria}</Text>
+                            </Td>
+                            <Td>
+                                <Text color={"black"}>{pieza.estante}</Text>
+                            </Td>
+                            <Td>
+                                <Text color={"black"}>{pieza.posicion}</Text>
+                            </Td>
+                            <Td>
+                                <Text color={"black"}>
+                                    {pieza.identificacion}
+                                </Text>
+                            </Td>
+                            <Td>
+                                <Text color={"black"}>{pieza.nombre}</Text>
+                            </Td>
+                        </Tr>
+                    ))}
                 </Tbody>
             </Table>
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPrev={handlePrevPage}
+                onNext={handleNextPage}
+            />
         </Box>
     );
 }
