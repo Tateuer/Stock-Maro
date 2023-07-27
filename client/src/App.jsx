@@ -8,6 +8,7 @@ import Stock from "./Components/Stock";
 import PiezaSeguridad from "./Components/PiezaSeguridad";
 import Cilindros from "./Components/Cilindros";
 import PiezaForm from "./Components/CargarPieza";
+import QrModificar from "./Components/QrModificar";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/consumibles" element={<ConsumiblesContainer />} />
           <Route path="/piezaseguridad" element={<PiezaSeguridad />} />
           <Route path="/cilindros" element={<Cilindros />} />
+          <Route path="/qr" element={<QrModificar />} />
         </Routes>
       </BrowserRouter>
     </Box>

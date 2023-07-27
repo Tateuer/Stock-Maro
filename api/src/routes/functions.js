@@ -3,8 +3,7 @@ const { Sequelize } = require("sequelize");
 
 const piezasDb = async () => {
   try {
-    const piezasMaro = await Piezas.findAll();
-    return piezasMaro;
+    return await Piezas.findAll({ order: [["id", "ASC"]] });
   } catch (error) {
     console.log(error);
   }

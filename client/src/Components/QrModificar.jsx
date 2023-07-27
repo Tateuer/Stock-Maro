@@ -17,11 +17,11 @@ import {
   Td,
   Button,
 } from "@chakra-ui/react";
-import Modal from "./Modal";
 import Pagination from "./Paginado";
 import Order from "./Order";
+import ModalQr from "./ModalQr";
 
-export default function Stock() {
+export default function QrModificar() {
   const dispatch = useDispatch();
   const piezas = useSelector((state) => state.piezas);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,19 +43,17 @@ export default function Stock() {
   const [startIndex, endIndex] = getPaginationRange();
   const piezasToShow = piezas.slice(startIndex, endIndex);
 
-  //   const handleIncrement = (piezaId) => {
-  //     const pieza = piezas.find((p) => p.id === piezaId);
-  //     const nuevaCantidad = pieza.cantidad + 1;
-  //     dispatch(actualizarCantidadPieza(piezaId, nuevaCantidad));
-  //   };
+  const handleIncrement = (piezaId) => {
+    const nuevaCantidad = selectedPieza.cantidad + 1;
+    dispatch(actualizarCantidadPieza(piezaId, nuevaCantidad));
+  };
 
-  //   const handleDecrement = (piezaId) => {
-  //     const pieza = piezas.find((p) => p.id === piezaId);
-  //     if (pieza.cantidad > 0) {
-  //       const nuevaCantidad = pieza.cantidad - 1;
-  //       dispatch(actualizarCantidadPieza(piezaId, nuevaCantidad));
-  //     }
-  //   };
+  const handleDecrement = (piezaId) => {
+    if (selectedPieza.cantidad > 0) {
+      const nuevaCantidad = selectedPieza.cantidad - 1;
+      dispatch(actualizarCantidadPieza(piezaId, nuevaCantidad));
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchPiezas());
@@ -78,7 +76,7 @@ export default function Stock() {
           marginRight={"10px"}
           color={"#0075B7"}
         >
-          STOCK
+          MODIFICAR PIEZA
         </Text>
         <Search />
       </Box>
@@ -89,9 +87,9 @@ export default function Stock() {
             <Th padding={"30px"}>ESTANTERÍA</Th>
             <Th padding={"30px"}>ESTANTE</Th>
             <Th padding={"30px"}>POSICIÓN</Th>
-            <Th padding={"30px"}>IDENTIFICACIÓN</Th>
+            <Th padding={"30px"}>IDENTIF.</Th>
             <Th padding={"30px"}>CÓDIGO</Th>
-            {/* <Th padding={"30px"}>CANTIDAD</Th> */}
+            <Th padding={"30px"}>CANTIDAD</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -134,14 +132,7 @@ export default function Stock() {
               >
                 {pieza.nombre}
               </Td>
-              {/* <Td>
-                <Button
-                  bg={"#0075B7"}
-                  size={"sm"}
-                  onClick={() => handleDecrement(pieza.id)}
-                >
-                  -
-                </Button>
+              <Td>
                 <Text
                   color={"black"}
                   fontWeight={"bold"}
@@ -150,14 +141,7 @@ export default function Stock() {
                 >
                   {pieza.cantidad}
                 </Text>
-                <Button
-                  bg={"#0075B7"}
-                  size={"sm"}
-                  onClick={() => handleIncrement(pieza.id)}
-                >
-                  +
-                </Button>
-              </Td> */}
+              </Td>
             </Tr>
           ))}
         </Tbody>
@@ -170,7 +154,13 @@ export default function Stock() {
       />
 
       {isModalOpen && (
-        <Modal pieza={selectedPieza} onClose={() => setIsModalOpen(false)} />
+        <ModalQr
+          pieza={selectedPieza}
+          onClose={() => setIsModalOpen(false)}
+          handleIncrement={() => handleIncrement(selectedPieza.id)}
+          handleDecrement={() => handleDecrement(selectedPieza.id)}
+          currentQuantity={selectedPieza.cantidad}
+        />
       )}
     </Box>
   );
