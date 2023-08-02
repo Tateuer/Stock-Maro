@@ -56,7 +56,7 @@ const NavBar = () => {
             <Link to="/piezaseguridad">Piezas de seguridad</Link>
             <Link to="/clientes">Clientes</Link>
             <Link to="/stock">Stock</Link>
-            <Link to="/qr">QRs</Link>
+            <Link to="/qr">QRs/Modificar</Link>
           </Grid>
         </Menu>
       ) : null}
