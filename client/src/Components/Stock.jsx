@@ -83,14 +83,14 @@ export default function Stock() {
         <Search />
       </Box>
       <Order />
-      <Table variant="striped">
+      <Table variant="striped" p={"-3rem"}>
         <Thead>
           <Tr color={"black"}>
-            <Th padding={"30px"}>ESTANTERÍA</Th>
-            <Th padding={"30px"}>ESTANTE</Th>
-            <Th padding={"30px"}>POSICIÓN</Th>
-            <Th padding={"30px"}>IDENTIFICACIÓN</Th>
-            <Th padding={"30px"}>CÓDIGO</Th>
+            <Th padding={"1rem"}>ESTANTERÍA</Th>
+            <Th padding={"1rem"}>ESTANTE</Th>
+            <Th padding={"1rem"}>POSICIÓN</Th>
+            <Th padding={"1rem"}>IDENTIFICACIÓN</Th>
+            <Th padding={"1rem"}>CÓDIGO</Th>
             {/* <Th padding={"30px"}>CANTIDAD</Th> */}
           </Tr>
         </Thead>

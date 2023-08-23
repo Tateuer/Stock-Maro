@@ -12,7 +12,14 @@ import QrModificar from "./Components/QrModificar";
 
 function App() {
   return (
-    <Box bg="white" p="8rem" borderRadius="1rem">
+    <Box
+      bg="white"
+      p="6rem 1rem"
+      borderRadius="1rem"
+      display={"flex"}
+      flexDirection={"column"}
+      z-zIndex={"2000"}
+    >
       <BrowserRouter>
         <NavBar />
         <Routes>

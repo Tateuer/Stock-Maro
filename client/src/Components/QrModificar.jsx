@@ -84,12 +84,12 @@ export default function QrModificar() {
       <Table variant="striped">
         <Thead>
           <Tr color={"black"}>
-            <Th padding={"30px"}>ESTANTERÍA</Th>
-            <Th padding={"30px"}>ESTANTE</Th>
-            <Th padding={"30px"}>POSICIÓN</Th>
-            <Th padding={"30px"}>IDENTIF.</Th>
-            <Th padding={"30px"}>CÓDIGO</Th>
-            <Th padding={"30px"}>CANTIDAD</Th>
+            <Th padding={".5rem"}>ESTANTERÍA</Th>
+            <Th padding={".5rem"}>ESTANTE</Th>
+            <Th padding={".5rem"}>POSICIÓN</Th>
+            <Th padding={".5rem"}>IDENTIF.</Th>
+            <Th padding={".5rem"}>CÓDIGO</Th>
+            <Th padding={".5rem"}>CANTIDAD</Th>
           </Tr>
         </Thead>
         <Tbody>
