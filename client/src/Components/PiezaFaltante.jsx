@@ -41,7 +41,7 @@ export default function PiezaFaltante() {
   const [startIndex, endIndex] = getPaginationRange();
 
   // Filtrar piezas con cantidad menor o igual a 3
-  const piezasFaltantes = piezas.filter((pieza) => pieza.cantidad <= 3);
+  const piezasFaltantes = piezas.filter((pieza) => pieza.cantidad <= 1);
   const piezasToShow = piezasFaltantes.slice(startIndex, endIndex);
 
   useEffect(() => {
