@@ -17,14 +17,12 @@ import {
   Td,
   Button,
 } from "@chakra-ui/react";
-import Modal from "./Modal";
 import Pagination from "./Paginado";
 import Order from "./Order";
 
-export default function Stock() {
+export default function PiezaFaltante() {
   const dispatch = useDispatch();
   const piezas = useSelector((state) => state.piezas);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPieza, setSelectedPieza] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -41,15 +39,18 @@ export default function Stock() {
   };
 
   const [startIndex, endIndex] = getPaginationRange();
-  const piezasToShow = piezas.slice(startIndex, endIndex);
+
+  // Filtrar piezas con cantidad menor o igual a 3
+  const piezasFaltantes = piezas.filter((pieza) => pieza.cantidad <= 3);
+  const piezasToShow = piezasFaltantes.slice(startIndex, endIndex);
 
   useEffect(() => {
     dispatch(fetchPiezas());
   }, [dispatch]);
 
   useEffect(() => {
-    setTotalPages(Math.ceil(piezas.length / 10));
-  }, [piezas]);
+    setTotalPages(Math.ceil(piezasFaltantes.length / 10));
+  }, [piezasFaltantes]);
 
   return (
     <Box>
@@ -64,7 +65,7 @@ export default function Stock() {
           marginRight={"10px"}
           color={"#0075B7"}
         >
-          STOCK
+          PIEZAS FALTANTES
         </Text>
         <Search />
       </Box>
@@ -83,40 +84,20 @@ export default function Stock() {
           {piezasToShow.map((pieza) => (
             <Tr key={pieza.id}>
               <Td>
-                <Text
-                  color={"black"}
-                  onClick={() => handlePiezaClick(pieza)}
-                  style={{ cursor: "pointer" }}
-                >
+                <Text color={"black"} onClick={() => handlePiezaClick(pieza)}>
                   {pieza.estanteria}
                 </Text>
               </Td>
-              <Td
-                onClick={() => handlePiezaClick(pieza)}
-                style={{ cursor: "pointer" }}
-                color={"black"}
-              >
+              <Td onClick={() => handlePiezaClick(pieza)} color={"black"}>
                 {pieza.estante}
               </Td>
-              <Td
-                onClick={() => handlePiezaClick(pieza)}
-                style={{ cursor: "pointer" }}
-                color={"black"}
-              >
+              <Td onClick={() => handlePiezaClick(pieza)} color={"black"}>
                 {pieza.posicion}
               </Td>
-              <Td
-                onClick={() => handlePiezaClick(pieza)}
-                style={{ cursor: "pointer" }}
-                color={"black"}
-              >
+              <Td onClick={() => handlePiezaClick(pieza)} color={"black"}>
                 {pieza.identificacion}
               </Td>
-              <Td
-                onClick={() => handlePiezaClick(pieza)}
-                style={{ cursor: "pointer" }}
-                color={"black"}
-              >
+              <Td onClick={() => handlePiezaClick(pieza)} color={"black"}>
                 {pieza.nombre}
               </Td>
             </Tr>
@@ -129,10 +110,6 @@ export default function Stock() {
         onPrev={() => setCurrentPage((prevPage) => prevPage - 1)}
         onNext={() => setCurrentPage((prevPage) => prevPage + 1)}
       />
-
-      {isModalOpen && (
-        <Modal pieza={selectedPieza} onClose={() => setIsModalOpen(false)} />
-      )}
     </Box>
   );
 }

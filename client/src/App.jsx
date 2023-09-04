@@ -9,6 +9,7 @@ import PiezaSeguridad from "./Components/PiezaSeguridad";
 import Cilindros from "./Components/Cilindros";
 import PiezaForm from "./Components/CargarPieza";
 import QrModificar from "./Components/QrModificar";
+import PiezaFaltante from "./Components/PiezaFaltante";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/piezaseguridad" element={<PiezaSeguridad />} />
           <Route path="/cilindros" element={<Cilindros />} />
           <Route path="/qr" element={<QrModificar />} />
+          <Route path="/piezafaltante" element={<PiezaFaltante />} />
         </Routes>
       </BrowserRouter>
     </Box>
