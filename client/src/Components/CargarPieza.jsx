@@ -11,7 +11,7 @@ import {
     GridItem,
 } from "@chakra-ui/react";
 import axios from "axios";
-import UploadImage from "../Cloudinary/Cloudinary";
+import UploadImage from "./UpLoadFile";
 import Select from "react-select";
 
 const PiezaForm = () => {

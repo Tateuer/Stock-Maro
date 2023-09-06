@@ -114,4 +114,21 @@ router.put("/piezas/:id", async (req, res) => {
   }
 });
 
+
+router.post('/uploadFile', (req, res, next) => {
+
+  let {file} = req.files;  
+  const name = file.name;
+  const md5 = file.md5;
+
+  const saveAs = `${md5}_${name}`;
+  console.log(`${__dirname}/../../public/files/${saveAs}`);
+  file.mv(`${__dirname}/../../public/files/${saveAs}`, function(err) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    return res.status(200).json({ status: 'uploaded', name, saveAs });
+  });
+});
+
 module.exports = router;
