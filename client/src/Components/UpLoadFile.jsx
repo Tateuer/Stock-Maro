@@ -1,35 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Image, Input } from "@chakra-ui/react";
-import { useState } from "react";
 
-const UploadImage = ({ onUpload }) => {
-  const [image, setImage] = useState("");
+const UploadFile = ({ onUpload }) => {
   const [loading, setLoading] = useState(false);
-  
-  const upImages = async (e) => {
+
+  const upFile = async (e) => {
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
     setLoading(true);
     try {
-      const res = await fetch(
-        `http://localhost:3001/uploadFile`, // link de la api
-        {
-          method: "POST",
-          body: data,
-        }
-      )
+      const res = await fetch(`http://localhost:3001/uploadFile`, {
+        method: "POST",
+        body: data,
+      });
       const response = await res.json();
-      if(response.status == 'uploaded'){
-        alert('Ok, Archivo subido');
-      }else{
+      if (response.status === "uploaded") {
+        alert("Ok, Archivo subido");
+        onUpload(files[0]);
+      } else {
         alert(response);
       }
-      //setImage(response.secure_url);
-      //onUpload(response.secure_url);
-      //setLoading(false);
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
   };
 
@@ -40,17 +33,16 @@ const UploadImage = ({ onUpload }) => {
         type="file"
         name="file"
         variant="unstyled"
-        _placeholder="Sube tu imagen aqui"
-        onChange={upImages}
-     
+        _placeholder="Sube tu archivo aqui"
+        onChange={upFile}
       />
       {loading ? (
-        <h3 color="black">Cargando imagen...</h3>
+        <h3 color="black">Cargando archivo...</h3>
       ) : (
-        <Image src={image} width={"100px"} />
+        <h2>Archivo subido correctamente</h2>
       )}
     </Box>
   );
 };
 
-export default UploadImage;
+export default UploadFile;

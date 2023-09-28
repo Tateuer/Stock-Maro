@@ -35,18 +35,17 @@ export function orderEstanteria(order) {
 export const actualizarCantidadPieza = (piezaId, cantidad) => {
   return async (dispatch) => {
     try {
-      // Realizar la solicitud PUT al backend para actualizar la cantidad
+      
       await axios.put(`http://localhost:3001/piezas/${piezaId}`, {
         cantidad: cantidad,
       });
 
-      // Si la solicitud es exitosa, despachar la acción con el tipo y payload
       dispatch({
         type: UPDATE_PIEZA_CANTIDAD,
         payload: { piezaId, cantidad },
       });
     } catch (error) {
-      // Manejar errores aquí si es necesario
+      
     }
   };
 };
