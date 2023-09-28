@@ -39,7 +39,7 @@ const UploadFile = ({ onUpload }) => {
       {loading ? (
         <h3 color="black">Cargando archivo...</h3>
       ) : (
-        <h2>Archivo subido correctamente</h2>
+        <h2 color="black">Archivo subido correctamente</h2>
       )}
     </Box>
   );

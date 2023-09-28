@@ -2,7 +2,7 @@ import { Box, Text, Td, Button } from "@chakra-ui/react";
 
 export default function Modal({ pieza, onClose }) {
   if (!pieza) {
-    return null; // No renderizar el modal si pieza es null
+    return null;
   }
 
   return (
