@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import UploadImage from "../Cloudinary/Cloudinary";
 import Select from "react-select";
-import UploadFile from "./UpLoadFile";
+import UploadFile from "./UploadFile";
 
 const PiezaForm = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ const PiezaForm = () => {
     piezaSeguridad: "",
     clientes: "",
     img: "",
-    archivo: null,
+    archivo: "",
     cantidad: 0,
   });
 
@@ -55,8 +55,8 @@ const PiezaForm = () => {
     setErrors({ ...errors, [name]: "" });
   };
 
-  const handleFileChange = (selectedFile) => {
-    setFormData({ ...formData, archivo: selectedFile });
+  const handleFileChange = (url) => {
+    setFormData({ ...formData, archivo: url });
   };
 
   const validateForm = () => {
@@ -121,6 +121,7 @@ const PiezaForm = () => {
   const handleUploadImage = (url) => {
     setFormData({ ...formData, img: url });
   };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -143,7 +144,7 @@ const PiezaForm = () => {
         piezaSeguridad: "",
         clientes: "",
         img: "",
-        archivo: null,
+        archivo: "",
         cantidad: 0,
       });
       setErrors({});
@@ -358,13 +359,11 @@ const PiezaForm = () => {
               {errors.clientes && <Box color="red">{errors.clientes}</Box>}
             </FormControl>
           </GridItem>
-          <GridItem area={"archivo"} margin="-1rem">
+          <GridItem area={"img"} margin="-1rem">
             <UploadImage onUpload={handleUploadImage} onChange={handleChange} />
           </GridItem>
           <GridItem area={"archivo"}>
-            <FormControl id="archivo" margin="-rem" pt={"1rem"}>
-              <UploadFile onUpload={handleFileChange} />
-            </FormControl>
+            <UploadFile onUpload={handleFileChange} onChange={handleChange} />
           </GridItem>
           <GridItem area={"crearpieza"}>
             <Button mt={4} bg={"#0075B7"} type="submit">

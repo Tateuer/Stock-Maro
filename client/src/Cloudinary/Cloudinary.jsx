@@ -31,6 +31,9 @@ const UploadImage = ({ onUpload }) => {
 
   return (
     <Box>
+      <Box color={"black"} fontSize="1.2rem">
+        <label htmlFor="file-input">Subir aquí tu imagen</label>
+      </Box>
       <Input
         color={"black"}
         type="file"

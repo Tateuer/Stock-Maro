@@ -3,7 +3,8 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
-const fileUpload = require('express-fileupload');
+const fileUpload = require("express-fileupload");
+const path = require("path");
 
 require("./db.js");
 
@@ -30,10 +31,13 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use(fileUpload({
-  useTempFiles : true,
-  tempFileDir : '/tmp/'
-}));
+server.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
+server.use("/download", express.static(path.join(__dirname, "public/files")));
 
 server.use("/", routes);
 

@@ -15,11 +15,13 @@ const UploadFile = ({ onUpload }) => {
         body: data,
       });
       const response = await res.json();
+
       if (response.status === "uploaded") {
         alert("Ok, Archivo subido");
-        onUpload(files[0]);
+        //onUpload(files[0]);
+        onUpload(response.name);
       } else {
-        alert(response);
+        alert("Error al subir el archivo: " + response.message);
       }
     } catch (error) {
       console.log(error.message);
@@ -27,7 +29,10 @@ const UploadFile = ({ onUpload }) => {
   };
 
   return (
-    <Box>
+    <Box marginTop={"2rem"}>
+      <Box color={"black"} fontSize="1.2rem">
+        <label htmlFor="file-input">Subir aquí tu archivo</label>
+      </Box>
       <Input
         color={"black"}
         type="file"
