@@ -20,7 +20,7 @@ const clientes = [
     },
     {
         id: "3",
-        cliente: "Industrias Guidi",
+        cliente: "I. Guidi",
         img: GuidiLogo,
     },
     {
@@ -48,11 +48,11 @@ const clientes = [
         cliente: "Mercedes-Benz",
         img: MercedesBenzLogo,
     },
-    {
-        id: "9",
-        cliente: "Peugeot",
-        img: PeugeotLogo,
-    },
+    // {
+    //     id: "9",
+    //     cliente: "Peugeot",
+    //     img: PeugeotLogo,
+    // },
 ];
 
 export const getClientes = () => {

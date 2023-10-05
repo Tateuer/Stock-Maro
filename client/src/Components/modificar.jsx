@@ -17,12 +17,14 @@ import {
     Td,
     Button,
 } from "@chakra-ui/react";
+import Modal from "./Modal";
 import Pagination from "./Paginado";
 import Order from "./Order";
 
-export default function PiezaFaltante() {
+export default function Stock() {
     const dispatch = useDispatch();
     const piezas = useSelector((state) => state.piezas);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPieza, setSelectedPieza] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -39,35 +41,29 @@ export default function PiezaFaltante() {
     };
 
     const [startIndex, endIndex] = getPaginationRange();
+    const piezasToShow = piezas.slice(startIndex, endIndex);
 
-    // Filtrar piezas con cantidad menor o igual a 1
-    const piezasFaltantes = piezas.filter((pieza) => pieza.cantidad <= 1);
+    const handleIncrement = (piezaId) => {
+        const pieza = piezas.find((p) => p.id === piezaId);
+        const nuevaCantidad = pieza.cantidad + 1;
+        dispatch(actualizarCantidadPieza(piezaId, nuevaCantidad));
+    };
 
-    const sortedPiezas = [...piezasFaltantes].sort((a, b) => {
-        if (a.estanteria !== b.estanteria) {
-            return a.estanteria - b.estanteria;
+    const handleDecrement = (piezaId) => {
+        const pieza = piezas.find((p) => p.id === piezaId);
+        if (pieza.cantidad > 0) {
+            const nuevaCantidad = pieza.cantidad - 1;
+            dispatch(actualizarCantidadPieza(piezaId, nuevaCantidad));
         }
-        if (a.estante !== b.estante) {
-            return a.estante - b.estante;
-        }
-        if (a.posicion !== b.posicion) {
-            return a.posicion - b.posicion;
-        }
-        if (a.identificacion !== b.identificacion) {
-            return a.identificacion.localeCompare(b.identificacion);
-        }
-        return 0;
-    });
+    };
 
-    const piezasToShow = sortedPiezas.slice(startIndex, endIndex);
+    // useEffect(() => {
+    //   dispatch(fetchPiezas());
+    // }, [dispatch]);
 
     useEffect(() => {
-        dispatch(fetchPiezas());
-    }, [dispatch]);
-
-    useEffect(() => {
-        setTotalPages(Math.ceil(piezasFaltantes.length / 10));
-    }, [piezasFaltantes]);
+        setTotalPages(Math.ceil(piezas.length / 10));
+    }, [piezas]);
 
     return (
         <Box>
@@ -82,20 +78,20 @@ export default function PiezaFaltante() {
                     marginRight={"10px"}
                     color={"#0075B7"}
                 >
-                    PIEZAS FALTANTES
+                    STOCK
                 </Text>
                 <Search />
             </Box>
             <Order />
-            <Table variant="striped" p={"-3rem"}>
+            <Table variant="striped">
                 <Thead>
                     <Tr color={"black"}>
-                        <Th padding={"1rem"}>ESTANTERÍA</Th>
-                        <Th padding={"1rem"}>ESTANTE</Th>
-                        <Th padding={"1rem"}>POSICIÓN</Th>
-                        <Th padding={"1rem"}>IDENTIFICACIÓN</Th>
-                        <Th padding={"1rem"}>CÓDIGO</Th>
-                        <Th padding={"1rem"}>CANTIDAD</Th>
+                        <Th padding={"30px"}>ESTANTERÍA</Th>
+                        <Th padding={"30px"}>ESTANTE</Th>
+                        <Th padding={"30px"}>POSICIÓN</Th>
+                        <Th padding={"30px"}>IDENTIFICACIÓN</Th>
+                        <Th padding={"30px"}>CÓDIGO</Th>
+                        <Th padding={"30px"}>CANTIDAD</Th>
                     </Tr>
                 </Thead>
                 <Tbody>
@@ -105,39 +101,62 @@ export default function PiezaFaltante() {
                                 <Text
                                     color={"black"}
                                     onClick={() => handlePiezaClick(pieza)}
+                                    style={{ cursor: "pointer" }}
                                 >
                                     {pieza.estanteria}
                                 </Text>
                             </Td>
                             <Td
                                 onClick={() => handlePiezaClick(pieza)}
+                                style={{ cursor: "pointer" }}
                                 color={"black"}
                             >
                                 {pieza.estante}
                             </Td>
                             <Td
                                 onClick={() => handlePiezaClick(pieza)}
+                                style={{ cursor: "pointer" }}
                                 color={"black"}
                             >
                                 {pieza.posicion}
                             </Td>
                             <Td
                                 onClick={() => handlePiezaClick(pieza)}
+                                style={{ cursor: "pointer" }}
                                 color={"black"}
                             >
                                 {pieza.identificacion}
                             </Td>
                             <Td
                                 onClick={() => handlePiezaClick(pieza)}
+                                style={{ cursor: "pointer" }}
                                 color={"black"}
                             >
                                 {pieza.nombre}
                             </Td>
-                            <Td
-                                onClick={() => handlePiezaClick(pieza)}
-                                color={"black"}
-                            >
-                                {pieza.cantidad}
+                            <Td>
+                                <Button
+                                    bg={"#0075B7"}
+                                    size={"sm"}
+                                    onClick={() => handleDecrement(pieza.id)}
+                                >
+                                    -
+                                </Button>
+                                <Text
+                                    color={"black"}
+                                    fontWeight={"bold"}
+                                    display="inline"
+                                    paddingX="10px"
+                                >
+                                    {pieza.cantidad}
+                                </Text>
+                                <Button
+                                    bg={"#0075B7"}
+                                    size={"sm"}
+                                    onClick={() => handleIncrement(pieza.id)}
+                                >
+                                    +
+                                </Button>
                             </Td>
                         </Tr>
                     ))}
@@ -149,6 +168,13 @@ export default function PiezaFaltante() {
                 onPrev={() => setCurrentPage((prevPage) => prevPage - 1)}
                 onNext={() => setCurrentPage((prevPage) => prevPage + 1)}
             />
+
+            {isModalOpen && (
+                <Modal
+                    pieza={selectedPieza}
+                    onClose={() => setIsModalOpen(false)}
+                />
+            )}
         </Box>
     );
 }

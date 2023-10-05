@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getClientes } from "../asyncMock";
-import { Box, Grid, Image } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 
 const ClientesContainer = () => {
     const [clientes, setClientes] = useState([]);
@@ -21,32 +21,35 @@ const ClientesContainer = () => {
     return (
         <Box
             border="2px"
-            bg="#00B0F0"
             borderRadius="1rem"
             marginTop="1rem"
             p=".1rem 1rem 1rem 1rem"
         >
-            <h2>CLIENTES DE MARO</h2>
+            <Text
+                fontWeight={"bold"}
+                fontSize={"25px"}
+                marginRight={"10px"}
+                color={"#0075B7"}
+            >
+                CLIENTES DE MARO
+            </Text>
             <Box>
                 {clientes.map((cliente) => (
-                    <Grid
+                    <Flex
                         key={cliente.id}
-                        justifyContent="center"
+                        justifyContent="space-between"
                         alignItems="center"
-                        fontSize="1.5rem"
-                        p="1rem"
-                        templateRows={"repeat(3, 1fr)"}
-                        templateColumns={"repeat(2, 1fr)"}
+                        margin="1.3rem 1.3rem"
                     >
-                        {cliente.cliente}{" "}
+                        <Text fontSize="1.5rem">{cliente.cliente}</Text>
                         <Image
-                            paddingLeft="1rem"
-                            maxHeight="60px"
-                            maxWidth="250px"
+                            maxHeight="70px"
+                            maxWidth="150px"
+                            paddingLeft="4rem"
                             src={cliente.img}
                             alt={cliente.cliente}
                         />
-                    </Grid>
+                    </Flex>
                 ))}
             </Box>
         </Box>

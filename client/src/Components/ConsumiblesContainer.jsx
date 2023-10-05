@@ -1,4 +1,4 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, Grid, Text } from "@chakra-ui/react";
 import { getConsumibles } from "../asyncMock";
 import { useEffect, useState } from "react";
 
@@ -19,10 +19,25 @@ const ConsumiblesContainer = () => {
 
     return (
         <Box>
-            <h2>Consumibles</h2>
+            <Text
+                fontWeight={"bold"}
+                fontSize={"25px"}
+                marginRight={"10px"}
+                color={"#0075B7"}
+            >
+                CONSUMIBLES
+            </Text>{" "}
             <Box>
                 {consumibles.map((consumible) => (
-                    <Grid key={consumible.id}> {consumible.detalle} </Grid>
+                    <Grid
+                        fontSize="1.1rem"
+                        p="1rem"
+                        borderBottom="1px solid #808080"
+                        key={consumible.id}
+                    >
+                        {" "}
+                        {consumible.detalle.toUpperCase()}{" "}
+                    </Grid>
                 ))}
             </Box>
         </Box>
