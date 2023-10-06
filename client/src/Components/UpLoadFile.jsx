@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Box, Input, Button } from "@chakra-ui/react";
+import { Box, Input, Button, Text } from "@chakra-ui/react";
 import Swal from "sweetalert2";
 
 const UploadFile = ({ onUpload }) => {
@@ -36,7 +36,6 @@ const UploadFile = ({ onUpload }) => {
           icon: "error",
           text: "Error: " + response.message,
         });
-        alert();
       }
     } catch (error) {
       console.log(error.message);
@@ -48,7 +47,9 @@ const UploadFile = ({ onUpload }) => {
   return (
     <Box marginTop={"2rem"}>
       <Box color={"black"} fontSize="1.2rem">
-        <label htmlFor="file-input">Subir aquí tu archivo</label>
+        <Text color={"#0075B7"} htmlFor="file-input">
+          Subir aquí tu archivo
+        </Text>
       </Box>
       <Input
         color={"black"}

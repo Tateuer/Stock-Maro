@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Image, Input } from "@chakra-ui/react";
+import { Box, Image, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
 const UploadImage = ({ onUpload }) => {
@@ -32,7 +32,9 @@ const UploadImage = ({ onUpload }) => {
   return (
     <Box>
       <Box color={"black"} fontSize="1.2rem">
-        <label htmlFor="file-input">Subir aquí tu imagen</label>
+        <Text color={"#0075B7"} htmlFor="file-input">
+          Subir aquí tu imagen
+        </Text>
       </Box>
       <Input
         color={"black"}
