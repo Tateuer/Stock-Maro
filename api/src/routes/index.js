@@ -39,7 +39,6 @@ router.get("/download/:filename", (req, res) => {
 
   if (fs.existsSync(filePath)) {
     res.sendFile(filePath);
-    console.log("filepath", filePath);
   } else {
     res.status(404).send("Archivo no encontrado");
   }

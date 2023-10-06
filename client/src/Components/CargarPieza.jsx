@@ -13,19 +13,20 @@ import axios from "axios";
 import UploadImage from "../Cloudinary/Cloudinary";
 import Select from "react-select";
 import UploadFile from "./UploadFile";
+import Swal from "sweetalert2";
 
 const PiezaForm = () => {
   const [formData, setFormData] = useState({
     nombre: "",
-    estanteria: 0,
-    estante: 0,
+    estanteria: "",
+    estante: "",
     posicion: "",
     identificacion: "",
     piezaSeguridad: "",
     clientes: "",
     img: "",
     archivo: "",
-    cantidad: 0,
+    cantidad: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -53,10 +54,6 @@ const PiezaForm = () => {
 
     setFormData({ ...formData, [name]: newValue });
     setErrors({ ...errors, [name]: "" });
-  };
-
-  const handleFileChange = (url) => {
-    setFormData({ ...formData, archivo: url });
   };
 
   const validateForm = () => {
@@ -121,7 +118,11 @@ const PiezaForm = () => {
   const handleUploadImage = (url) => {
     setFormData({ ...formData, img: url });
   };
-  
+
+  const handleFileChange = (url) => {
+    setFormData({ ...formData, archivo: url });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -137,16 +138,17 @@ const PiezaForm = () => {
 
       setFormData({
         nombre: "",
-        estanteria: 0,
-        estante: 0,
+        estanteria: "",
+        estante: "",
         posicion: "",
         identificacion: "",
         piezaSeguridad: "",
         clientes: "",
         img: "",
         archivo: "",
-        cantidad: 0,
+        cantidad: "",
       });
+      Swal.fire("Pieza creada", "Bien hecho!", "success");
       setErrors({});
     } catch (error) {
       console.error(error);
@@ -196,6 +198,7 @@ const PiezaForm = () => {
                 bg={"white"}
                 type="tex"
                 name="estanteria"
+                value={formData.estanteria}
                 placeholder="0"
                 onChange={handleChange}
                 p=".5em"
@@ -215,6 +218,7 @@ const PiezaForm = () => {
                 bg={"white"}
                 type="text"
                 name="estante"
+                value={formData.estante}
                 placeholder="0"
                 onChange={handleChange}
                 p=".5em"
@@ -234,6 +238,7 @@ const PiezaForm = () => {
                 bg={"white"}
                 type="text"
                 name="posicion"
+                value={formData.posicion}
                 placeholder="0"
                 onChange={handleChange}
                 p=".5em"
@@ -275,6 +280,7 @@ const PiezaForm = () => {
                 type="text"
                 name="cantidad"
                 placeholder="0"
+                value={formData.cantidad}
                 onChange={handleChange}
                 p=".5em"
                 fontSize="1.4em"
@@ -359,10 +365,10 @@ const PiezaForm = () => {
               {errors.clientes && <Box color="red">{errors.clientes}</Box>}
             </FormControl>
           </GridItem>
-          <GridItem area={"img"} margin="-1rem">
+          <GridItem value={formData.img} area={"img"} margin="-1rem">
             <UploadImage onUpload={handleUploadImage} onChange={handleChange} />
           </GridItem>
-          <GridItem area={"archivo"}>
+          <GridItem value={formData.archivo} area={"archivo"}>
             <UploadFile onUpload={handleFileChange} onChange={handleChange} />
           </GridItem>
           <GridItem area={"crearpieza"}>
