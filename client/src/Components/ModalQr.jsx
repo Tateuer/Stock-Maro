@@ -89,9 +89,6 @@ export default function ModalQr({ pieza, onClose, onSave }) {
         <Button bg={"#0075B7"} onClick={onClose}>
           Cerrar
         </Button>
-        <Button bg={"#0075B7"} m={"10px"} fontSize="15px">
-          Descargar Archivo
-        </Button>
         <Button
           bg={"#0075B7"}
           m={"10px"}
