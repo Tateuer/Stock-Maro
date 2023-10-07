@@ -15,14 +15,15 @@ const clientes = [
     },
     {
         id: "2",
-        cliente: "Volvo",
-        img: VolvoLogo,
+        cliente: "Toyota (Metalsa)",
+        img: ToyotaLogo,
     },
     {
         id: "3",
-        cliente: "I. Guidi",
-        img: GuidiLogo,
+        cliente: "Mercedes-Benz",
+        img: MercedesBenzLogo,
     },
+
     {
         id: "4",
         cliente: "Honda",
@@ -30,8 +31,8 @@ const clientes = [
     },
     {
         id: "5",
-        cliente: "Toyota(Metalsa)",
-        img: ToyotaLogo,
+        cliente: "Volvo",
+        img: VolvoLogo,
     },
     {
         id: "6",
@@ -45,9 +46,10 @@ const clientes = [
     },
     {
         id: "8",
-        cliente: "Mercedes-Benz",
-        img: MercedesBenzLogo,
+        cliente: "I. Guidi",
+        img: GuidiLogo,
     },
+
     // {
     //     id: "9",
     //     cliente: "Peugeot",

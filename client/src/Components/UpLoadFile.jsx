@@ -3,73 +3,74 @@ import { Box, Input, Button, Text } from "@chakra-ui/react";
 import Swal from "sweetalert2";
 
 const UploadFile = ({ onUpload }) => {
-  const [loading, setLoading] = useState(false);
-  const fileInputRef = useRef(null);
+    const [loading, setLoading] = useState(false);
+    const fileInputRef = useRef(null);
 
-  const handleFileUpload = async () => {
-    const file = fileInputRef.current.files[0];
+    const handleFileUpload = async () => {
+        const file = fileInputRef.current.files[0];
 
-    if (!file) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Por favor, selecciona un archivo primero.",
-      });
-      return;
-    }
+        if (!file) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Por favor, selecciona un archivo primero.",
+            });
+            return;
+        }
 
-    const data = new FormData();
-    data.append("file", file);
-    setLoading(true);
-    try {
-      const res = await fetch(`http://localhost:3001/uploadFile`, {
-        method: "POST",
-        body: data,
-      });
-      const response = await res.json();
+        const data = new FormData();
+        data.append("file", file);
+        setLoading(true);
+        try {
+            const res = await fetch(`http://localhost:3001/uploadFile`, {
+                method: "POST",
+                body: data,
+            });
+            const response = await res.json();
 
-      if (response.status === "uploaded") {
-        Swal.fire("Archivo subido!", "Bien hecho!", "success");
-        onUpload(response.name);
-      } else {
-        Swal.fire({
-          icon: "error",
-          text: "Error: " + response.message,
-        });
-      }
-    } catch (error) {
-      console.log(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+            if (response.status === "uploaded") {
+                Swal.fire("Archivo subido!", "Bien hecho!", "success");
+                onUpload(response.name);
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    text: "Error: " + response.message,
+                });
+            }
+        } catch (error) {
+            console.log(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-  return (
-    <Box marginTop={"2rem"}>
-      <Box color={"black"} fontSize="1.2rem">
-        <Text color={"#0075B7"} htmlFor="file-input">
-          Subir aquí tu archivo
-        </Text>
-      </Box>
-      <Input
-        color={"black"}
-        type="file"
-        name="file"
-        variant="unstyled"
-        _placeholder="Sube tu archivo aqui"
-        ref={fileInputRef}
-      />
-      <Button
-        mt={4}
-        bg={"#0075B7"}
-        onClick={handleFileUpload}
-        disabled={loading}
-      >
-        Cargar archivo
-      </Button>
-      {loading ? <h3 color="black">Cargando archivo...</h3> : null}
-    </Box>
-  );
+    return (
+        <Box marginTop={"2rem"}>
+            <Box color={"black"} fontSize="1.2rem">
+                <Text color={"#0075B7"} htmlFor="file-input">
+                    Subir aquí tu archivo
+                </Text>
+            </Box>
+            <Input
+                color={"black"}
+                type="file"
+                name="file"
+                variant="unstyled"
+                _placeholder="Sube tu archivo aqui"
+                ref={fileInputRef}
+            />
+            <Button
+                mt={4}
+                bg={"#0075B7"}
+                onClick={handleFileUpload}
+                disabled={loading}
+                ml={"1rem"}
+            >
+                Cargar archivo
+            </Button>
+            {loading ? <h3 color="black">Cargando archivo...</h3> : null}
+        </Box>
+    );
 };
 
 export default UploadFile;
