@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Image, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
 
-const UploadImage = ({ onUpload }) => {
+const UploadImage = ({ onUpload, resetImage }) => {
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setImage("");
+    setLoading(false);
+  }, [resetImage]);
 
   const upImages = async (e) => {
     const files = e.target.files;

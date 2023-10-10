@@ -30,6 +30,8 @@ const PiezaForm = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [resetUploadImage, setResetUploadImage] = useState(false);
+  //const [resetUploadFile, setResetUploadFile] = useState(false);
 
   const customStyles = {
     control: (provided, state) => ({
@@ -148,6 +150,7 @@ const PiezaForm = () => {
         archivo: "",
         cantidad: "",
       });
+      setResetUploadImage(!resetUploadImage);
       Swal.fire("Pieza creada", "Bien hecho!", "success");
       setErrors({});
     } catch (error) {
@@ -366,10 +369,20 @@ const PiezaForm = () => {
             </FormControl>
           </GridItem>
           <GridItem value={formData.img} area={"img"} margin="-1rem">
-            <UploadImage onUpload={handleUploadImage} onChange={handleChange} />
+            <UploadImage
+              onUpload={handleUploadImage}
+              onChange={handleChange}
+              resetImg={() => setResetUploadImage(false)}
+              key={resetUploadImage}
+            />
           </GridItem>
           <GridItem value={formData.archivo} area={"archivo"}>
-            <UploadFile onUpload={handleFileChange} onChange={handleChange} />
+            <UploadFile
+              onUpload={handleFileChange}
+              onChange={handleChange}
+              // resetFile={() => setResetUploadFile(false)}
+              // key={resetUploadFile}
+            />
           </GridItem>
           <GridItem area={"crearpieza"}>
             <Button mt={4} bg={"#0075B7"} type="submit">
