@@ -1,10 +1,21 @@
+@font-face {
+    font-family: CenturyGothic;
+    src: url(./GOTHICB0.TTF);
+}
+
 #root {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0;
     text-align: center;
+    font-family: CenturyGothic;
 }
 
 body {
     background-color: #0075b7;
+}
+
+input.css-1nhs7dx,
+input.css-sd68xi {
+    font-family: CenturyGothic !important;
 }

@@ -27,7 +27,7 @@ export default function Search() {
                 type="text"
                 onChange={handleChange}
                 value={search}
-                placeholder="Codigo"
+                placeholder="Código"
             />
             <Button
                 bg={"#0075B7"}

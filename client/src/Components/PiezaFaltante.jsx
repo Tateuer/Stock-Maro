@@ -29,7 +29,7 @@ export default function PiezaFaltante() {
 
     const handlePiezaClick = (pieza) => {
         setSelectedPieza(pieza);
-        setIsModalOpen(true);
+        // setIsModalOpen(true);
     };
 
     const getPaginationRange = () => {
