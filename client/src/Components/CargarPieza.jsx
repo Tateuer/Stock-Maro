@@ -14,6 +14,7 @@ import UploadImage from "../Cloudinary/Cloudinary";
 import Select from "react-select";
 import UploadFile from "./UploadFile";
 import Swal from "sweetalert2";
+import { useRef } from "react";
 
 const PiezaForm = () => {
   const [formData, setFormData] = useState({
@@ -31,7 +32,8 @@ const PiezaForm = () => {
 
   const [errors, setErrors] = useState({});
   const [resetUploadImage, setResetUploadImage] = useState(false);
-  //const [resetUploadFile, setResetUploadFile] = useState(false);
+  const [resetUploadFile, setResetUploadFile] = useState(false);
+  // const [isFileUploaded, setIsFileUploaded] = useState(false); // Nuevo estado
 
   const customStyles = {
     control: (provided, state) => ({
@@ -125,6 +127,11 @@ const PiezaForm = () => {
     setFormData({ ...formData, archivo: url });
   };
 
+  // const handleFileUpload = async () => {
+  //   // Lógica de carga de archivo
+  //   setIsFileUploaded(true);
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -150,7 +157,11 @@ const PiezaForm = () => {
         archivo: "",
         cantidad: "",
       });
+      // if (!isFileUploaded) {
+      //   handleFileUpload(); // Llama a la función de carga del archivo si aún no se ha cargado
+      // }
       setResetUploadImage(!resetUploadImage);
+      setResetUploadFile(!resetUploadFile);
       Swal.fire("Pieza creada", "Bien hecho!", "success");
       setErrors({});
     } catch (error) {
@@ -380,8 +391,8 @@ const PiezaForm = () => {
             <UploadFile
               onUpload={handleFileChange}
               onChange={handleChange}
-              // resetFile={() => setResetUploadFile(false)}
-              // key={resetUploadFile}
+              resetFile={() => setResetUploadFile(false)}
+              key={resetUploadFile}
             />
           </GridItem>
           <GridItem area={"crearpieza"}>

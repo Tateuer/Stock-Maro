@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
 import { Box, Input, Button, Text } from "@chakra-ui/react";
 import Swal from "sweetalert2";
+import { useEffect } from "react";
 
-const UploadFile = ({ onUpload }) => {
+const UploadFile = ({ onUpload, resetFile }) => {
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -44,6 +45,10 @@ const UploadFile = ({ onUpload }) => {
     }
   };
 
+  useEffect(() => {
+    fileInputRef.current.value = "";
+  }, [resetFile]);
+
   return (
     <Box marginTop={"2rem"}>
       <Box color={"black"} fontSize="1.2rem">
@@ -59,7 +64,7 @@ const UploadFile = ({ onUpload }) => {
         _placeholder="Sube tu archivo aqui"
         ref={fileInputRef}
       />
-      <Button
+       <Button
         mt={4}
         bg={"#0075B7"}
         onClick={handleFileUpload}
@@ -67,14 +72,13 @@ const UploadFile = ({ onUpload }) => {
         ml={"1rem"}
       >
         Cargar archivo
-      </Button>
+      </Button> 
       {loading ? <h3 color="black">Cargando archivo...</h3> : null}
     </Box>
   );
 };
 
 export default UploadFile;
-
 // import React, { useState } from "react";
 // import { Box, Image, Input } from "@chakra-ui/react";
 
