@@ -16,7 +16,7 @@ const Order = (props) => {
       <Select
         bg={"#0075B7"}
         m={"10px"}
-        fontSize="17px"
+        fontSize="18px"
         borderRadius={"4px"}
         onChange={handleEstaneria}
       >
