@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   FormControl,
   FormLabel,
@@ -14,7 +14,6 @@ import UploadImage from "../Cloudinary/Cloudinary";
 import Select from "react-select";
 import UploadFile from "./UploadFile";
 import Swal from "sweetalert2";
-import { useRef } from "react";
 
 const PiezaForm = () => {
   const [formData, setFormData] = useState({
@@ -30,10 +29,10 @@ const PiezaForm = () => {
     cantidad: "",
   });
 
+  const fileUploadRef = useRef(null);
   const [errors, setErrors] = useState({});
   const [resetUploadImage, setResetUploadImage] = useState(false);
   const [resetUploadFile, setResetUploadFile] = useState(false);
-  // const [isFileUploaded, setIsFileUploaded] = useState(false); // Nuevo estado
 
   const customStyles = {
     control: (provided, state) => ({
@@ -124,13 +123,24 @@ const PiezaForm = () => {
   };
 
   const handleFileChange = (url) => {
-    setFormData({ ...formData, archivo: url });
+    console.log("asd", fileUploadRef.current.files[0]);
   };
 
-  // const handleFileUpload = async () => {
-  //   // Lógica de carga de archivo
-  //   setIsFileUploaded(true);
-  // };
+  const handleFileUpload = async (file) => {
+    const data = new FormData();
+
+    data.append("file", file);
+    try {
+      const res = await fetch(`http://localhost:3001/uploadFile`, {
+        method: "POST",
+        body: data,
+      });
+      const response = await res.json();
+      return response;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -140,10 +150,15 @@ const PiezaForm = () => {
     }
 
     try {
-      const response = await axios.post(
-        `http://localhost:3001/piezas`,
-        formData
-      );
+      const file = fileUploadRef.current.files[0];
+      let fileUpload = null;
+      if (file) {
+        fileUpload = await handleFileUpload(file);
+      }
+      const response = await axios.post(`http://localhost:3001/piezas`, {
+        ...formData,
+        archivo: fileUpload ? fileUpload.url : "",
+      });
 
       setFormData({
         nombre: "",
@@ -157,9 +172,6 @@ const PiezaForm = () => {
         archivo: "",
         cantidad: "",
       });
-      // if (!isFileUploaded) {
-      //   handleFileUpload(); // Llama a la función de carga del archivo si aún no se ha cargado
-      // }
       setResetUploadImage(!resetUploadImage);
       setResetUploadFile(!resetUploadFile);
       Swal.fire("Pieza creada", "Bien hecho!", "success");
@@ -393,6 +405,7 @@ const PiezaForm = () => {
               onChange={handleChange}
               resetFile={() => setResetUploadFile(false)}
               key={resetUploadFile}
+              fileUploadRef={fileUploadRef}
             />
           </GridItem>
           <GridItem area={"crearpieza"}>

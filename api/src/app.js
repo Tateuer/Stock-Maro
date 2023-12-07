@@ -37,8 +37,11 @@ server.use(
     tempFileDir: "/tmp/",
   })
 );
-server.use("/download", express.static(path.join(__dirname, "public/files")));
 
+server.use(
+  "/download",
+  express.static(path.resolve(__dirname, "../public/files"))
+);
 server.use("/", routes);
 
 // Error catching endware.

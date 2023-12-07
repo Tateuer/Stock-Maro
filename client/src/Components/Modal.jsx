@@ -1,5 +1,4 @@
-import { Box, Text, Td, Button } from "@chakra-ui/react";
-import { descargarArchivo } from "../redux/actions/stockActions";
+import { Box, Text, Button } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 
 export default function Modal({ pieza, onClose }) {
@@ -8,12 +7,6 @@ export default function Modal({ pieza, onClose }) {
   if (!pieza) {
     return null;
   }
-
-  const handleDescargarArchivo = () => {
-    if (pieza && pieza.id) {
-      dispatch(descargarArchivo(pieza.id));
-    }
-  };
 
   return (
     <Box
@@ -50,14 +43,22 @@ export default function Modal({ pieza, onClose }) {
         <Text color={"black"}>Cliente: {pieza.clientes}</Text>
         <Text color={"black"}>Cantidad:{pieza.cantidad}</Text>
         <Button
+          as="a"
+          _hover={{ textColor: "white" }}
+          textColor={"white"}
           bg={"#0075B7"}
-          m={"10px"}
-          fontSize="15px"
-          onClick={handleDescargarArchivo}
+          paddingY={"9px"}
+          paddingX={"20px"}
+          borderRadius={"8px"}
+          variant={"solid"}
+          colorScheme="blue"
+          href={pieza.archivo}
+          marginRight={"10px"}
         >
           {" "}
           Descargar Archivo
         </Button>
+
         <Button bg={"#0075B7"} onClick={onClose}>
           Cerrar
         </Button>

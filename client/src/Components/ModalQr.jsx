@@ -1,4 +1,4 @@
-import { Box, Text, Td, Button } from "@chakra-ui/react";
+import { Box, Text, Button } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
 import { Input } from "@chakra-ui/react";

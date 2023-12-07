@@ -22,7 +22,7 @@ const Order = (props) => {
       >
         <option value="all">TODOS</option>
         <option value="1">ESTANTERIA 1</option>
-        <option value="2">ESTANTERIA 2 </option>
+        <option value="2">ESTANTERIA 2</option>
         <option value="3">ESTANTERIA 3</option>
         <option value="4">ESTANTERIA 4</option>
         <option value="5">ESTANTERIA 5</option>

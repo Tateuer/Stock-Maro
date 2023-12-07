@@ -168,7 +168,11 @@ router.post("/uploadFile", (req, res, next) => {
       return res.status(500).send(err);
     }
 
-    return res.status(200).json({ status: "uploaded", name: saveAs });
+    return res.status(200).json({
+      status: "uploaded",
+      name: saveAs,
+      url: `${process.env.BACKEND_URL}/download/${saveAs}`,
+    });
   });
 });
 
